@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
     val cardBill1 = CardBill().apply {
         billId = "1"
         billNumber = "123"
-        transaction = mutableListOf(
+        transactions = mutableListOf(
             CardBillTransaction().apply {
                 transactionId = "1"
                 cardNumber = "456"
@@ -22,7 +22,7 @@ fun main(args: Array<String>) {
     val cardBill2 = CardBill().apply {
         billId = "1"
         billNumber = "123"
-        transaction = mutableListOf(
+        transactions = mutableListOf(
             CardBillTransaction().apply {
                 transactionId = "1"
                 cardNumber = "555"
@@ -33,7 +33,7 @@ fun main(args: Array<String>) {
     val cardBill3 = CardBill().apply {
         billId = "1"
         billNumber = "123"
-        transaction = mutableListOf(
+        transactions = mutableListOf(
             CardBillTransaction().apply {
                 transactionId = "1"
                 cardNumber = "456"
@@ -44,7 +44,7 @@ fun main(args: Array<String>) {
     val cardBill4 = CardBill().apply {
         billId = "1"
         billNumber = "123"
-        transaction = mutableListOf(
+        transactions = mutableListOf(
             CardBillTransaction().apply {
                 transactionId = "1"
                 cardNumber = "555"
@@ -67,7 +67,7 @@ fun main(args: Array<String>) {
 data class CardBill(
     var billId: String? = null,
     var billNumber: String? = null,
-    var transaction: MutableList<CardBillTransaction>? = null
+    var transactions: MutableList<CardBillTransaction>? = null
 )
 
 data class CardBillTransaction(
