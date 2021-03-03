@@ -1,6 +1,8 @@
 package com.example.todo.test
 
 import org.apache.commons.lang3.builder.EqualsBuilder
+import org.slf4j.LoggerFactory
+
 
 fun main(args: Array<String>) {
 
@@ -62,6 +64,7 @@ fun main(args: Array<String>) {
 
     println("size result : ${oldBills.size == newBills.size}")
     println("result : ${EqualsBuilder.reflectionEquals(cardBill1, cardBill2)}")
+
 }
 
 data class CardBill(
