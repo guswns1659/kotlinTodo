@@ -3,13 +3,17 @@ package com.example.todo.test
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.slf4j.LoggerFactory
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
 
 @DisplayName("LocalDateTime 테스트")
 class LocalDateTimeTest {
+
+    private val logger = LoggerFactory.getLogger(LocalDateTimeTest::class.java)
 
     @DisplayName("ofInstant 테스트")
     @Test
@@ -39,5 +43,20 @@ class LocalDateTimeTest {
 
         // then
         assertThat(ktcTime).isBefore(LocalDateTime.now())
+    }
+
+    @DisplayName("epoch ms (UTC)를 YYYYMM(KST) 변환 테스트")
+    @Test
+    fun epochTime_convert_KST_test() {
+        // given
+        // 2021.03.04 15:00:00의 epoch ms (UTC) : 1614870000000
+        val epochMs: Long = 1614870000000
+
+        // when
+        val convertedTime = LocalDate.ofInstant(Instant.ofEpochMilli(epochMs), ZoneId.of("Asia/Seoul")).toString()
+
+        // then
+        assertThat(convertedTime).isEqualTo("2021-03-05")
+        logger.info("KstTime = {}", convertedTime)
     }
 }
