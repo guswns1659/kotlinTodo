@@ -53,10 +53,29 @@ class LocalDateTimeTest {
         val epochMs: Long = 1614870000000
 
         // when
-        val convertedTime = LocalDate.ofInstant(Instant.ofEpochMilli(epochMs), ZoneId.of("Asia/Seoul")).toString()
+        val kstTime = LocalDate.ofInstant(Instant.ofEpochMilli(epochMs), ZoneId.of("Asia/Seoul"))
+        val kstTimeYearMonth = convertYearMonth(kstTime)
+        val utcTime = LocalDate.ofInstant(Instant.ofEpochMilli(epochMs), ZoneId.of("UTC")).toString()
+
 
         // then
-        assertThat(convertedTime).isEqualTo("2021-03-05")
-        logger.info("KstTime = {}", convertedTime)
+        assertThat(kstTimeYearMonth).isEqualTo("202103")
+        assertThat(utcTime).isEqualTo("2021-03-04")
+        logger.info("KstTime = {}", utcTime)
+    }
+
+    @DisplayName("convertYearMonth test")
+    @Test
+    fun convertYearMonth_test() {
+        // given
+        val localDate = LocalDate.of(2021, 3, 4)
+        // when, then
+        assertThat(convertYearMonth(localDate)).isEqualTo("202103")
+    }
+
+    private fun convertYearMonth(kstTime: LocalDate): String {
+        var answer = StringBuilder("${kstTime.year}${kstTime.month.value}")
+        if (answer.length < 6) answer.insert(4, 0) else answer
+        return answer.toString()
     }
 }
