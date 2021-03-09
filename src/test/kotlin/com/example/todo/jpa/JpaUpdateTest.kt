@@ -38,4 +38,31 @@ class JpaUpdateTest {
         // then
         assertThat(savedPerson2?.name).isEqualTo("changedName")
     }
+
+    @DisplayName("새로운 엔티티의 id를 기존 엔티티의 id로 저장하면 덮어쓰는지 테스트")
+    @Test
+    fun jpa_entity_field_update_test() {
+        // given
+        val personDto = PersonDto("old")
+        val oldEntity = Person().apply {
+            this.name = personDto.name
+        }
+
+        // when
+        val oldPerson = personRepository.save(oldEntity)
+        val newDto = PersonDto("new")
+        val newEntity = Person().apply {
+            this.name = newDto.name
+        }
+
+        val newPerson = newEntity.apply {
+            this.id = oldPerson.id
+        }
+
+        personRepository.save(newPerson)
+
+        // then
+        logger.info("findAll = {}", personRepository.findAll()[0].name)
+        assertThat(personRepository.findAll().size).isEqualTo(1)
+    }
 }
