@@ -78,4 +78,15 @@ class LocalDateTimeTest {
         if (answer.length < 6) answer.insert(4, 0) else answer
         return answer.toString()
     }
+
+    @DisplayName("LocalDateTime nano")
+    @Test
+    fun localDateTimeNano_test() {
+        // given
+
+
+        // when, then
+        logger.info("now = {}", LocalDateTime.now())
+
+    }
 }
