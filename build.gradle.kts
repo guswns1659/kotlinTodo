@@ -15,6 +15,14 @@ repositories {
     mavenCentral()
 }
 
+val springCloudVersion = "2020.0.0"
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+    }
+}
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
@@ -27,6 +35,10 @@ dependencies {
     testImplementation("com.h2database:h2")
     // apache common
     implementation("org.apache.commons:commons-lang3:3.10")
+    // wiremock
+    testImplementation("com.github.tomakehurst:wiremock-jre8:2.27.2")
+    testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
+    testImplementation("commons-io:commons-io:2.6")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
