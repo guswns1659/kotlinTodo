@@ -89,4 +89,15 @@ class LocalDateTimeTest {
         logger.info("now = {}", LocalDateTime.now())
 
     }
+
+    @DisplayName("now() 의 minusDay 테스트")
+    @Test
+    fun localDateTime_minusDay_test() {
+        // given
+        val minusDays = LocalDateTime.now(ZoneId.of("Asia/Seoul")).minusDays(4)
+        logger.info("minusDays = {}", minusDays)
+
+        // when, then
+        assertThat(minusDays.monthValue).isEqualTo(4)
+    }
 }
