@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import javax.transaction.Transactional
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest
@@ -64,5 +65,31 @@ class JpaUpdateTest {
         // then
         logger.info("findAll = {}", personRepository.findAll()[0].name)
         assertThat(personRepository.findAll().size).isEqualTo(1)
+    }
+
+    @DisplayName("@Query 쿼리 실행 시점 파악")
+    @Test
+    fun query_annotation_execution_test() {
+        // given
+        val person = Person().apply {
+            name = "name"
+        }
+
+        personRepository.save(person);
+        personRepository.flush();
+        println("---insert---")
+
+        // when
+        personRepository.deleteByNameInQuery(person.name ?: "");
+
+        println("--- delete? ---")
+
+        val person2 = Person().apply {
+            name = "name2"
+        }
+
+        personRepository.save(person2);
+
+        println("--- insert? ---")
     }
 }
