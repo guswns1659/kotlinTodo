@@ -48,4 +48,16 @@ class LoggerTest {
             return
         }
     }
+
+    @Test
+    @DisplayName("logger format 변수 테스트")
+    fun logger_format_test() {
+        // given
+        val location = "location"
+        val title = "title"
+        val toString = StringBuilder(
+            LoggerTest::class.java.getEnclosingMethod().getName()).append(" ").append(title).append(", ").append("{}").toString()
+
+        logger.info(toString,  "123", "123")
+    }
 }

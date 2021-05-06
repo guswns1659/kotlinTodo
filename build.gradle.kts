@@ -39,6 +39,10 @@ dependencies {
     testImplementation("com.github.tomakehurst:wiremock-jre8:2.27.2")
     testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
     testImplementation("commons-io:commons-io:2.6")
+    // lombok
+    // implementation("org.projectlombok:lombok:'1.18.18")
+
+
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
