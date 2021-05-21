@@ -1,5 +1,6 @@
 package com.example.todo.test
 
+import com.example.todo.utils.CardBill
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -72,7 +73,6 @@ class LocalDateTimeTest {
     @Test
     fun localDateTimeNano_test() {
         // given
-
 
         // when, then
         logger.info("now = {}", LocalDateTime.now())
