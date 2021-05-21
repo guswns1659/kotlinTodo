@@ -12,6 +12,7 @@ import javax.transaction.Transactional
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest
+@Transactional
 class JpaUpdateTest {
 
     @Autowired

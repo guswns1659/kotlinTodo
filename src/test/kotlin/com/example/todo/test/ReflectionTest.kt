@@ -1,5 +1,7 @@
 package com.example.todo.test
 
+import com.example.todo.utils.CardBill
+import com.example.todo.utils.CardBillTransaction
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

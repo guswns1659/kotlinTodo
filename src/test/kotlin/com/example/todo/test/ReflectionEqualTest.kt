@@ -1,5 +1,7 @@
 package com.example.todo.test
 
+import com.example.todo.utils.CardBill
+import com.example.todo.utils.CardBillTransaction
 import com.example.todo.utils.ReflectionCompareUtil
 import org.apache.commons.lang3.builder.EqualsBuilder
 import org.assertj.core.api.Assertions.assertThat

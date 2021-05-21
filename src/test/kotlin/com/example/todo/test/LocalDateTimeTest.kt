@@ -16,18 +16,6 @@ class LocalDateTimeTest {
 
     private val logger = LoggerFactory.getLogger(LocalDateTimeTest::class.java)
 
-    @DisplayName("ofInstant 테스트")
-    @Test
-    fun ofInstant_test() {
-        // given
-        val ofInstant = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("Asia/Seoul"))
-
-        // when
-
-        // then
-        assertThat(ofInstant).isAfter(LocalDateTime.now())
-    }
-
     @DisplayName("epoch를 이해하기 위한 테스트")
     @Test
     fun epochTime_test() {
@@ -91,14 +79,4 @@ class LocalDateTimeTest {
 
     }
 
-    @DisplayName("now() 의 minusDay 테스트")
-    @Test
-    fun localDateTime_minusDay_test() {
-        // given
-        val minusDays = LocalDateTime.now(ZoneId.of("Asia/Seoul")).minusDays(4)
-        logger.info("minusDays = {}", minusDays)
-
-        // when, then
-        assertThat(minusDays.monthValue).isEqualTo(4)
-    }
 }

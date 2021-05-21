@@ -1,8 +1,5 @@
 package com.example.todo.utils
 
-import com.example.todo.test.CardBill
-import com.example.todo.test.CardBillTransaction
-import java.lang.reflect.Field
 
 class ReflectionCompareUtil {
     companion object {
@@ -96,129 +93,16 @@ class ReflectionCompareUtil {
             }
             return diffFieldMap
         }
-
-        /*
-        fun reflectionCompareCardTransaction(
-            oldTransactions: List<CardTransaction>,
-            newTransactions: List<CardTransaction>
-        ): MutableMap<String, Any> {
-
-            val diffFieldMap = mutableMapOf<String, Any>()
-
-            // 각 DTO별로 비교
-            for (index in oldTransactions.indices) {
-                val old = oldTransactions[index]
-                val new = newTransactions[index]
-
-                val declaredFields = old.javaClass.declaredFields
-                declaredFields.forEach { field ->
-                    field.isAccessible = true
-                    val oldField = field.get(old)
-                    val newField = field.get(new)
-
-                    addLogForDiffFields("cardTransaction", oldField, newField, diffFieldMap, index, field)
-                }
-            }
-            return diffFieldMap
-        }
-
-        fun reflectionCompareCards(oldCards: List<Card>, newCards: List<Card>): MutableMap<String, Any> {
-
-            val diffFieldMap = mutableMapOf<String, Any>()
-
-            for (index in oldCards.indices) {
-                val old = oldCards[index]
-                val new = newCards[index]
-
-                val declaredFields = old.javaClass.declaredFields
-                declaredFields.forEach { field ->
-                    field.isAccessible = true
-
-                    val oldField = field.get(old)
-                    val newField = field.get(new)
-
-                    addLogForDiffFields("card", oldField, newField, diffFieldMap, index, field)
-                }
-            }
-            return diffFieldMap
-        }
-
-        fun reflectionCompareCardLoans(oldLoans: List<Loan>, newLoans: List<Loan>): MutableMap<String, Any> {
-            val diffFieldMap = mutableMapOf<String, Any>()
-
-            for (index in oldLoans.indices) {
-                val old = oldLoans[index]
-                val new = newLoans[index]
-
-                val declaredFields = old.javaClass.declaredFields
-                declaredFields.forEach { field ->
-                    field.isAccessible = true
-
-                    val oldField = field.get(old)
-                    val newField = field.get(new)
-
-                    addLogForDiffFields("loan", oldField, newField, diffFieldMap, index, field)
-                }
-            }
-            return diffFieldMap
-        }
-
-        fun reflectionCompareCreditLimit(
-            oldCreditLimit: CreditLimit,
-            newCreditLimit: CreditLimit
-        ): MutableMap<String, Any> {
-
-            val diffFieldMap = mutableMapOf<String, Any>()
-
-            val declaredFields = oldCreditLimit.javaClass.declaredFields
-            declaredFields.forEach { limit ->
-                limit.isAccessible = true
-                val old = limit.get(oldCreditLimit)
-                val new = limit.get(newCreditLimit)
-
-                old?.let {
-                    val limitDeclaredFields = old.javaClass.declaredFields
-                    limitDeclaredFields.forEach { field ->
-                        field.isAccessible = true
-                        val oldField = field.get(old)
-                        val newField = field.get(new)
-
-                        // oldCreditLimit.loanLimit.totalAmout = ??
-                        if (oldField == null || newField == null) {
-                            if (!(oldField == null && newField == null)) {
-                                diffFieldMap["oldCreditLimit.${limit.name}.${field.name}"] = oldField ?: "null"
-                                diffFieldMap["newCreditLimit.${limit.name}.${field.name}"] = newField ?: "null"
-                            }
-                        } else if (!oldField.equals(newField)) {
-                            diffFieldMap["oldCreditLimit.${limit.name}.${field.name}"] = oldField.toString()
-                            diffFieldMap["newCreditLimit.${limit.name}.${field.name}"] = newField.toString()
-                        }
-                    }
-                }
-            }
-            return diffFieldMap
-        }
-
-        private fun addLogForDiffFields(
-            dtoName: String,
-            oldField: Any?,
-            newField: Any?,
-            diffFieldMap: MutableMap<String, Any>,
-            index: Int,
-            field: Field
-        ) {
-            if (oldField == null || newField == null) {
-                if (!(oldField == null && newField == null)) {
-                    diffFieldMap["old$dtoName.${index}th.${field.name}"] = oldField ?: "null"
-                    diffFieldMap["new$dtoName.${index}th.${field.name}"] = newField ?: "null"
-                }
-            } else if (!oldField.equals(newField)) {
-                diffFieldMap["old$dtoName.${index}th.${field.name}"] = oldField.toString()
-                diffFieldMap["new$dtoName.${index}th.${field.name}"] = newField.toString()
-            }
-        }
-    }
-
-         */
     }
 }
+
+data class CardBill(
+    var billId: String? = null,
+    var billNumber: String? = null,
+    var transactions: MutableList<CardBillTransaction>? = null
+)
+
+data class CardBillTransaction(
+    var transactionId: String? = null,
+    var cardNumber: String? = null
+)
