@@ -24,6 +24,8 @@ class WordCountTest {
 
 class Word {
     companion object {
+        private const val DELIMITER = "\\s+|\t"
+
         fun count(location: String): List<Int> {
             var lineCount = 0
             var wordCount = 0
@@ -32,7 +34,7 @@ class Word {
                 .forEach {
                     it.run {
                         lineCount++
-                        wordCount += it.split(Regex("\\s+|\t")).count()
+                        wordCount += it.split(Regex(DELIMITER)).count()
                         byteCount += it.toByteArray().size + 1
                     }
                 }
