@@ -3,8 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.4.1"
     id("io.spring.dependency-management") version "1.0.10.RELEASE"
-    kotlin("jvm") version "1.4.21"
-    kotlin("plugin.spring") version "1.4.21"
+    id("org.jetbrains.kotlin.plugin.spring") version "1.6.0"
+    kotlin("jvm") version "1.6.0"
 }
 
 group = "com.example"
@@ -35,15 +35,16 @@ dependencies {
     testImplementation("com.h2database:h2")
     // apache common
     implementation("org.apache.commons:commons-lang3:3.10")
+    // coroutine
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+
+    // lombok
+    // implementation("org.projectlombok:lombok:'1.18.18")
+
     // wiremock
     testImplementation("com.github.tomakehurst:wiremock-jre8:2.27.2")
     testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
     testImplementation("commons-io:commons-io:2.6")
-    // lombok
-    // implementation("org.projectlombok:lombok:'1.18.18")
-
-
-
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
