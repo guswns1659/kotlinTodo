@@ -1,22 +1,26 @@
 package com.example.todo.coroutine
 
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
-fun main() = runBlocking {
-    main2()
-
+fun main() = runBlocking() {
+    log("runblocking start")
     launch {
+        log("Will be printed")
         delay(1000)
-        log("Will not be printed")
     }
-
-    Unit
+    launch {
+        log("Will be printed2")
+        delay(1000)
+    }
+    log("runblocking done")
 }
 
 suspend fun main2(): String = coroutineScope {
     throw IllegalStateException()
     ""
+}
+
+fun <T> lam(block: String.() -> T): T {
+    println(block)
+    return block.invoke("")
 }
