@@ -70,7 +70,7 @@ fun mergeSort(arr: IntArray): IntArray {
 
     // 배열을 중간 지점을 기준으로 두 부분으로 나눕니다.
     val mid = arr.size / 2
-    val left = arr.sliceArray(0 until mid)  // 배열의 앞부분 (0부터 mid까지)
+    val left = arr.sliceArray(0 until mid)  // 배열의 앞부분 (0부터 mid까지/**/)
     val right = arr.sliceArray(mid until arr.size)  // 배열의 뒷부분 (mid부터 끝까지)
 
     // 재귀적으로 좌측과 우측 부분을 정렬한 후 병합합니다.
@@ -99,7 +99,7 @@ fun merge(left: IntArray, right: IntArray): IntArray {
 
 fun quickSort(arr: IntArray): IntArray {
     if (arr.size < 2) return arr // 배열이 1 이하의 크기면 이미 정렬된 상태
-
+/**/
     val pivot = arr[arr.size / 2] // 배열의 중간 요소를 피벗으로 선택
     val equal = arr.filter { it == pivot }.toIntArray() // 피벗과 같은 값을 가진 요소들
     val less = arr.filter { it < pivot }.toIntArray() // 피벗보다 작은 값을 가진 요소들
@@ -107,6 +107,78 @@ fun quickSort(arr: IntArray): IntArray {
 
     // 재귀적으로 정렬한 배열을 결합하여 반환
     return quickSort(less) + equal + quickSort(greater)
+}
+
+class MyHashTable<K, V>(private val capacity: Int) {
+    private val table: Array<MutableList<Pair<K, V>>?> = arrayOfNulls(capacity)
+
+    fun put(key: K, value: V) {
+        val hash = hashing(key)
+        val bucket = table[hash] ?: mutableListOf()
+
+        bucket.removeIf { it.first == key}
+        bucket.add(Pair(key, value))
+    }
+
+    private fun hashing(key: K) = key.hashCode() % capacity
+
+    fun remove(key: K): Boolean {
+        val hash = hashing(key)
+        val bucket = table[hash] ?: return false
+
+        return bucket.removeIf { it.first == key }
+    }
+}
+
+class MyHeap(val isMinHeap: Boolean=true) {
+    private val list = mutableListOf<Int>()
+    private fun parentIndex(currentIndex: Int) = (currentIndex - 1) / 2
+
+    fun add(value: Int) {
+        list.add(value)
+        var currentIndex = list.lastIndex
+
+        while(currentIndex > 0 && compare(currentIndex, parentIndex(currentIndex))) {
+            swap(currentIndex, parentIndex(currentIndex))
+            currentIndex = parentIndex(currentIndex)
+        }
+    }
+
+    fun poll(): Int? {
+        if (list.isEmpty()) return null
+        val top = list[0]
+        val last = list.removeAt(list.lastIndex)
+        if (list.isNotEmpty()) {
+            list[0] = last
+            heapify(0)
+        }
+        return top
+    }
+
+    fun heapify(current: Int) {
+        val left = current * 2 + 1
+        val right = current * 2 + 2
+        var largestOrSmallest = current
+
+        when {
+            left < list.size && compare(left, current) -> largestOrSmallest = left
+            right < list.size && compare(right, current) -> largestOrSmallest = right
+        }
+        if (current != largestOrSmallest) {
+            swap(largestOrSmallest, current)
+            heapify(largestOrSmallest)
+        }
+    }
+
+    private fun compare(i: Int, j: Int): Boolean {
+        return if (isMinHeap) list[i] < list[j] else list[i] > list[j]
+    }
+
+    private fun swap(i: Int, j: Int) {
+        val temp = list[i]
+        list[i] = list[j]
+        list[j] = temp
+    }
 }
 
 
